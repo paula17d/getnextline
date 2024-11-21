@@ -19,7 +19,8 @@ int main ()
         // break;
         if (line == NULL)
             break;
-        printf("%s", line);
+        printf("line = %s", line);
+        break;
     }
     close(fd);
     return (0);

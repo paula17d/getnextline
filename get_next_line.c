@@ -6,11 +6,38 @@
 /*   By: pauladrettas <pauladrettas@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:19:47 by pauladretta       #+#    #+#             */
-/*   Updated: 2024/11/21 16:06:21 by pauladretta      ###   ########.fr       */
+/*   Updated: 2024/11/21 18:30:48 by pauladretta      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "get_next_line.h"
+
+void moving_buffer_left(char *buffer, char *line)
+{
+    int i;
+    int j;
+
+    i = 0;
+    j = ft_strlen(line);
+    while (i < ft_strlen(line))
+    {
+        buffer[i] = buffer[j];
+        i++;
+        j++;
+    }
+    while (j <= BUFFER_SIZE)
+    {
+        buffer[i] = buffer[j];
+        i++;
+        j++;
+    }
+    
+    while (i <= BUFFER_SIZE)
+    {
+        buffer[i] = '\0';
+        i++;
+    }
+}
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
@@ -129,10 +156,9 @@ int ft_isin(char * string, char a)
 	return(0);
 }
 
-char * get_buffer(int fd)
+char *get_buffer(char buffer[], int fd)
 {
     int bytes_read;
-    static char buffer[BUFFER_SIZE + 1]; 
     char *read_line = malloc(sizeof(char) * 1);
     read_line[0] = '\0';
     while(1)
@@ -157,8 +183,12 @@ char * get_buffer(int fd)
 char * get_next_line(int fd)
 {
     char * line;
-    line = get_buffer(fd);
+    static char buffer[BUFFER_SIZE + 1]; 
+    line = get_buffer(buffer, fd);
     line = detele_all_after_newline(line);
+    printf("buffer before moving :\n%s\n",buffer );
+    moving_buffer_left(buffer, line);
+    printf("buffer after shifting: \n%s\n",buffer );
     
 
     return (line);
