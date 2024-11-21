@@ -10,4 +10,5 @@
 
 # define  BUFFER_SIZE  8
 char * get_next_line(int fd);
+char * get_buffer(int fd);
 #endif
