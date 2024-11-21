@@ -8,6 +8,6 @@
 #include <sys/uio.h>
 #include <unistd.h>
 
-# define  BUFFER_SIZE  5
+# define  BUFFER_SIZE  8
 char * get_next_line(int fd);
 #endif

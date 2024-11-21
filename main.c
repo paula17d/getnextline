@@ -16,10 +16,10 @@ int main ()
     while(1)
     {
         line = get_next_line(fd);
-        printf("%s", line);
         // break;
         if (line == NULL)
             break;
+        printf("%s", line);
     }
     close(fd);
     return (0);
