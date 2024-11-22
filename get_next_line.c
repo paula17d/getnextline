@@ -6,36 +6,68 @@
 /*   By: pauladrettas <pauladrettas@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:19:47 by pauladretta       #+#    #+#             */
-/*   Updated: 2024/11/21 18:30:48 by pauladretta      ###   ########.fr       */
+/*   Updated: 2024/11/21 21:30:51 by pauladretta      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "get_next_line.h"
 
+char *strcpy_til_newline(char *buffer)
+{
+    int i;
+    int len;
+    char *line;
+
+    len = 0;
+    i = 0;
+    while (buffer != NULL && buffer[i] != '\0')
+    {
+        len++;
+        if (buffer[i] == '\n')
+        {
+            break;
+        }
+        i++;
+    }
+    line = malloc(sizeof (char) * (len + 1));
+    if (buffer[i] == '\0')
+    {
+        line = ft_strcpy(line, buffer);   
+    }
+    else
+    {
+        ft_strlcpy(line, buffer, len + 1);
+    }
+    return (line);
+}
+
 void moving_buffer_left(char *buffer, char *line)
 {
     int i;
     int j;
-
-    i = 0;
-    j = ft_strlen(line);
-    while (i < ft_strlen(line))
-    {
-        buffer[i] = buffer[j];
-        i++;
-        j++;
-    }
-    while (j <= BUFFER_SIZE)
-    {
-        buffer[i] = buffer[j];
-        i++;
-        j++;
-    }
     
-    while (i <= BUFFER_SIZE)
+    if(line != NULL)
     {
-        buffer[i] = '\0';
-        i++;
+        i = 0;
+        j = ft_strlen(line);
+        while (i < ft_strlen(line))
+        {
+            buffer[i] = buffer[j];
+            i++;
+            j++;
+        }
+        while (j <= BUFFER_SIZE)
+        {
+            buffer[i] = buffer[j];
+            i++;
+            j++;
+        }
+        
+        while (i <= BUFFER_SIZE)
+        {
+            buffer[i] = '\0';
+            i++;
+        }
     }
 }
 
@@ -79,12 +111,13 @@ char *detele_all_after_newline(char *read_line)
             if (read_line[i] == '\n')
                 break;
         }
+        
         line = malloc(sizeof(char) * (len + 1));
         ft_strlcpy(line, read_line,len + 2);
         free(read_line);
     }
-    else 
-        line = read_line;
+    // else 
+    //     line = read_line;
     return(line);
 }
 size_t	ft_strlen(const char *str)
@@ -98,7 +131,7 @@ size_t	ft_strlen(const char *str)
 	}
 	return (i);
 }
-static char	*ft_strcpy(char *goal, const char *start)
+char	*ft_strcpy(char *goal, const char *start)
 {
 	char	*temp;
 
@@ -164,9 +197,9 @@ char *get_buffer(char buffer[], int fd)
     while(1)
     {
         bytes_read = read(fd, buffer, BUFFER_SIZE);
-        if (bytes_read == 0)
+        if (bytes_read <= 0)
         {
-            return (NULL);
+            return NULL;
         }
         buffer[bytes_read] = '\0';
         read_line = ft_strjoin_gnl(read_line, buffer);
@@ -183,13 +216,29 @@ char *get_buffer(char buffer[], int fd)
 char * get_next_line(int fd)
 {
     char * line;
+    char * read_line;
     static char buffer[BUFFER_SIZE + 1]; 
-    line = get_buffer(buffer, fd);
-    line = detele_all_after_newline(line);
-    printf("buffer before moving :\n%s\n",buffer );
-    moving_buffer_left(buffer, line);
-    printf("buffer after shifting: \n%s\n",buffer );
     
-
+    if (buffer[0] == '\0')
+    {
+        line = NULL;
+    }
+    if (ft_strlen(buffer) > 0)
+    {
+       
+        // exit(0);
+        line = strcpy_til_newline(buffer);
+    }
+    else
+    {
+        read_line = get_buffer(buffer, fd);
+        if (buffer[0] != '\0')
+            line = detele_all_after_newline(read_line);
+    }
+    
+    moving_buffer_left(buffer, line);
+   
+   
+    
     return (line);
 }

@@ -11,7 +11,6 @@ int main ()
         write(1, "error opening file\n", 20);
         return (1);
     }
-    printf("fd = %d\n", fd);
 
     while(1)
     {
@@ -19,8 +18,8 @@ int main ()
         // break;
         if (line == NULL)
             break;
-        printf("line = %s", line);
-        break;
+        printf("%s", line);
+        // break;
     }
     close(fd);
     return (0);
