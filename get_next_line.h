@@ -6,7 +6,7 @@
 /*   By: pauladrettas <pauladrettas@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 12:15:35 by pauladretta       #+#    #+#             */
-/*   Updated: 2024/11/23 12:15:39 by pauladretta      ###   ########.fr       */
+/*   Updated: 2024/11/23 13:25:35 by pauladretta      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 34
 # endif
 
 int		ft_strlen(const char *str);

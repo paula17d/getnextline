@@ -6,7 +6,7 @@
 /*   By: pauladrettas <pauladrettas@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:19:47 by pauladretta       #+#    #+#             */
-/*   Updated: 2024/11/23 12:15:13 by pauladretta      ###   ########.fr       */
+/*   Updated: 2024/11/23 17:14:33 by pauladretta      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ char	*get_next_line(int fd)
 	else
 	{
 		read_line = get_buffer(buffer, fd);
-		if (read_line && ft_strlen(read_line) == 0)
+		if (read_line != NULL && ft_strlen(read_line) == 0)
 		{
 			free(read_line);
 			return (NULL);
@@ -149,4 +149,21 @@ char	*get_next_line(int fd)
 	}
 	moving_buffer_left(buffer);
 	return (line);
+}
+
+int main ()
+{
+
+    char * line;
+    int fd = open("./file", O_RDONLY);
+
+    while(1)
+    {
+        line = get_next_line(fd);
+        if (line == NULL)
+            break;
+        printf("%s", line);
+    }
+    close(fd);
+    return (0);
 }
