@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pauladrettas <pauladrettas@student.42.f    +#+  +:+       +#+        */
+/*   By: pdrettas <pdrettas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:19:47 by pauladretta       #+#    #+#             */
-/*   Updated: 2024/11/23 17:14:33 by pauladretta      ###   ########.fr       */
+/*   Updated: 2024/11/23 19:49:48 by pdrettas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,19 +151,19 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-int main ()
-{
+// int main ()
+// {
 
-    char * line;
-    int fd = open("./file", O_RDONLY);
+//     char * line;
+//     int fd = open("./file", O_RDONLY);
 
-    while(1)
-    {
-        line = get_next_line(fd);
-        if (line == NULL)
-            break;
-        printf("%s", line);
-    }
-    close(fd);
-    return (0);
-}
+//     while(1)
+//     {
+//         line = get_next_line(fd);
+//         if (line == NULL)
+//             break;
+//         printf("%s", line);
+//     }
+//     close(fd);
+//     return (0);
+// }
