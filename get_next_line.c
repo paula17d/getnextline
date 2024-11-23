@@ -6,239 +6,147 @@
 /*   By: pauladrettas <pauladrettas@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:19:47 by pauladretta       #+#    #+#             */
-/*   Updated: 2024/11/21 21:30:51 by pauladretta      ###   ########.fr       */
+/*   Updated: 2024/11/23 12:15:13 by pauladretta      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "get_next_line.h"
+#include "get_next_line.h"
 
-char *strcpy_til_newline(char *buffer)
+char	*strcpy_til_newline(char *buffer)
 {
-    int i;
-    int len;
-    char *line;
+	int		i;
+	int		len;
+	char	*line;
 
-    len = 0;
-    i = 0;
-    while (buffer != NULL && buffer[i] != '\0')
-    {
-        len++;
-        if (buffer[i] == '\n')
-        {
-            break;
-        }
-        i++;
-    }
-    line = malloc(sizeof (char) * (len + 1));
-    if (buffer[i] == '\0')
-    {
-        line = ft_strcpy(line, buffer);   
-    }
-    else
-    {
-        ft_strlcpy(line, buffer, len + 1);
-    }
-    return (line);
-}
-
-void moving_buffer_left(char *buffer, char *line)
-{
-    int i;
-    int j;
-    
-    if(line != NULL)
-    {
-        i = 0;
-        j = ft_strlen(line);
-        while (i < ft_strlen(line))
-        {
-            buffer[i] = buffer[j];
-            i++;
-            j++;
-        }
-        while (j <= BUFFER_SIZE)
-        {
-            buffer[i] = buffer[j];
-            i++;
-            j++;
-        }
-        
-        while (i <= BUFFER_SIZE)
-        {
-            buffer[i] = '\0';
-            i++;
-        }
-    }
-}
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
-{
-	size_t	i;
-	size_t	src_length;
-
+	len = 0;
 	i = 0;
-	src_length = 0;
-	while (src[src_length] != '\0')
+	while (buffer != NULL && buffer[i] != '\0')
 	{
-		src_length++;
-	}
-	if (dstsize == 0)
-	{
-		return (src_length);
-	}
-	while (src[i] != '\0' && i < (dstsize -1))
-	{
-		dst[i] = src[i];
+		len++;
+		if (buffer[i] == '\n')
+			break ;
 		i++;
 	}
-	dst[i] = '\0';
-	return (src_length);
+	line = malloc(sizeof(char) * (len + 1));
+	if (!line)
+		return (NULL);
+	if (buffer[i] == '\0')
+		line = ft_strcpy(line, buffer);
+	else
+		ft_strlcpy(line, buffer, len + 1);
+	return (line);
 }
-char *detele_all_after_newline(char *read_line)
+
+void	moving_buffer_left(char buffer[])
 {
-    int i;
-    size_t len;
-    char * line;
-    
-    if (ft_isin(read_line, '\n'))
-    {
-        len = 0;
-        i = 0;
-        while(read_line != NULL && read_line[i] != '\0')
-        {
-            len++;
-            i++;
-            if (read_line[i] == '\n')
-                break;
-        }
-        
-        line = malloc(sizeof(char) * (len + 1));
-        ft_strlcpy(line, read_line,len + 2);
-        free(read_line);
-    }
-    // else 
-    //     line = read_line;
-    return(line);
-}
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
+	int	i;
+	int	j;
+	int	h;
 
 	i = 0;
-	while (str[i] != '\0')
+	h = ft_isin(buffer, '\n');
+	if (h >= 0)
 	{
-		i++;
-	}
-	return (i);
-}
-char	*ft_strcpy(char *goal, const char *start)
-{
-	char	*temp;
-
-	temp = goal;
-	while (*start != '\0')
-		*temp++ = *start++;
-	*temp = '\0';
-	return (goal);
-}
-
-char	*ft_strjoin_gnl(char *s1, char *s2)
-{
-	size_t	s1_len;
-	size_t	s2_len;
-	size_t	total_len;
-	char	*result;
-
-	s1_len = 0;
-	s2_len = 0;
-	if (s1 == (NULL) && s2 == (NULL))
-		return (NULL);
-	if (s1 != (NULL))
-		s1_len = ft_strlen(s1);
-	if (s2 != (NULL))
-		s2_len = ft_strlen(s2);
-	total_len = (s1_len + s2_len) + 1;
-	result = malloc(total_len * sizeof(char));
-	if (result == (NULL))
-		return (NULL);
-	if (s1 != NULL)
-		ft_strcpy(result, s1);
-	if (s2 != NULL)
-		ft_strcpy(result + s1_len, s2);
-	return (result);
-}
-
-int ft_isin(char * string, char a)
-{
-	int i;
-
-	if (string == NULL)
-	{
-		return (0);
-	}
-
-	i = 0;
-	while (string[i] != '\0')
-	{
-		if (string[i] == a)
+		j = h + 1;
+		while (j < BUFFER_SIZE + 1)
 		{
-			return (1);
+			buffer[i++] = buffer[j++];
 		}
-		i++;
+		while (i < BUFFER_SIZE + 1)
+		{
+			buffer[i++] = '\0';
+		}
 	}
-	return(0);
+	else
+	{
+		while (i < BUFFER_SIZE + 1)
+		{
+			buffer[i++] = '\0';
+		}
+	}
 }
 
-char *get_buffer(char buffer[], int fd)
+char	*detele_all_after_newline(char *read_line)
 {
-    int bytes_read;
-    char *read_line = malloc(sizeof(char) * 1);
-    read_line[0] = '\0';
-    while(1)
-    {
-        bytes_read = read(fd, buffer, BUFFER_SIZE);
-        if (bytes_read <= 0)
-        {
-            return NULL;
-        }
-        buffer[bytes_read] = '\0';
-        read_line = ft_strjoin_gnl(read_line, buffer);
-        int return_value = ft_isin(buffer, '\n');
-        if (return_value == 1)//das heisst new line wurde gefunden
-        {
-            break;
-        }
-    }
-    
-    return (read_line);
+	int		i;
+	size_t	len;
+	char	*line;
+
+	if (ft_isin(read_line, '\n') >= 0)
+	{
+		len = 0;
+		i = 0;
+		while (read_line != NULL && read_line[i] != '\0')
+		{
+			len++;
+			if (read_line[i] == '\n')
+				break ;
+			i++;
+		}
+		line = malloc(sizeof(char) * (len + 1));
+		if (!line)
+			return (free(read_line), NULL);
+		ft_strlcpy(line, read_line, len + 1);
+		free(read_line);
+	}
+	else
+		line = read_line;
+	return (line);
 }
 
-char * get_next_line(int fd)
+char	*get_buffer(char buffer[], int fd)
 {
-    char * line;
-    char * read_line;
-    static char buffer[BUFFER_SIZE + 1]; 
-    
-    if (buffer[0] == '\0')
-    {
-        line = NULL;
-    }
-    if (ft_strlen(buffer) > 0)
-    {
-       
-        // exit(0);
-        line = strcpy_til_newline(buffer);
-    }
-    else
-    {
-        read_line = get_buffer(buffer, fd);
-        if (buffer[0] != '\0')
-            line = detele_all_after_newline(read_line);
-    }
-    
-    moving_buffer_left(buffer, line);
-   
-   
-    
-    return (line);
+	int		bytes_read;
+	char	*read_line;
+
+	read_line = ft_strjoin_gnl(NULL, buffer);
+	if (!read_line)
+		return (NULL);
+	while (1)
+	{
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read == 0)
+			break ;
+		if (bytes_read < 0)
+		{
+			free(read_line);
+			return (NULL);
+		}
+		buffer[bytes_read] = '\0';
+		read_line = ft_strjoin_gnl(read_line, buffer);
+		if (!read_line)
+			return (NULL);
+		if (ft_isin(buffer, '\n') >= 0)
+			break ;
+	}
+	return (read_line);
+}
+
+char	*get_next_line(int fd)
+{
+	char		*line;
+	char		*read_line;
+	static char	buffer[BUFFER_SIZE + 1];
+
+	line = NULL;
+	if (fd < 0 || BUFFER_SIZE == 0)
+	{
+		moving_buffer_left(buffer);
+		return (NULL);
+	}
+	if (ft_isin(buffer, '\n') >= 0)
+		line = strcpy_til_newline(buffer);
+	else
+	{
+		read_line = get_buffer(buffer, fd);
+		if (read_line && ft_strlen(read_line) == 0)
+		{
+			free(read_line);
+			return (NULL);
+		}
+		if (buffer[0] != '\0')
+			line = detele_all_after_newline(read_line);
+	}
+	moving_buffer_left(buffer);
+	return (line);
 }
