@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdrettas <pdrettas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pauladrettas <pauladrettas@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 11:19:47 by pauladretta       #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/11/24 17:21:58 by pauladretta      ###   ########.fr       */
-=======
-/*   Updated: 2024/11/23 19:49:48 by pdrettas         ###   ########.fr       */
->>>>>>> 138f6a6dc4bee5e5ecdc195e656f26469fd65749
+/*   Created: 2024/11/24 17:30:18 by pauladretta       #+#    #+#             */
+/*   Updated: 2024/11/24 17:32:13 by pauladretta      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,12 +160,8 @@ char	*get_next_line(int fd)
 //         line = get_next_line(fd);
 //         if (line == NULL)
 //             break;
-<<<<<<< HEAD
 //         printf("line =%s", line);
 // 		free(line);
-=======
-//         printf("%s", line);
->>>>>>> 138f6a6dc4bee5e5ecdc195e656f26469fd65749
 //     }
 //     close(fd);
 //     return (0);
