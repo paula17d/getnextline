@@ -6,7 +6,7 @@
 /*   By: pauladrettas <pauladrettas@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:19:47 by pauladretta       #+#    #+#             */
-/*   Updated: 2024/11/24 17:20:35 by pauladretta      ###   ########.fr       */
+/*   Updated: 2024/11/24 17:21:58 by pauladretta      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,20 +149,20 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-int main ()
-{
+// int main ()
+// {
 
-    char * line;
-    int fd = open("./file", O_RDONLY);
+//     char * line;
+//     int fd = open("./file", O_RDONLY);
 
-    while(1)
-    {
-        line = get_next_line(fd);
-        if (line == NULL)
-            break;
-        printf("line =%s", line);
-		free(line);
-    }
-    close(fd);
-    return (0);
-}
+//     while(1)
+//     {
+//         line = get_next_line(fd);
+//         if (line == NULL)
+//             break;
+//         printf("line =%s", line);
+// 		free(line);
+//     }
+//     close(fd);
+//     return (0);
+// }
