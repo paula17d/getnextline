@@ -6,7 +6,7 @@
 /*   By: pauladrettas <pauladrettas@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:19:47 by pauladretta       #+#    #+#             */
-/*   Updated: 2024/11/23 17:14:33 by pauladretta      ###   ########.fr       */
+/*   Updated: 2024/11/24 17:20:35 by pauladretta      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	moving_buffer_left(char buffer[])
 	int	h;
 
 	i = 0;
-	h = ft_isin(buffer, '\n');
+	h = ft_char_in_string(buffer, '\n');
 	if (h >= 0)
 	{
 		j = h + 1;
@@ -72,7 +72,7 @@ char	*detele_all_after_newline(char *read_line)
 	size_t	len;
 	char	*line;
 
-	if (ft_isin(read_line, '\n') >= 0)
+	if (ft_char_in_string(read_line, '\n') >= 0)
 	{
 		len = 0;
 		i = 0;
@@ -99,7 +99,7 @@ char	*get_buffer(char buffer[], int fd)
 	int		bytes_read;
 	char	*read_line;
 
-	read_line = ft_strjoin_gnl(NULL, buffer);
+	read_line = ft_strjoin_gnl(NULL, buffer); // 
 	if (!read_line)
 		return (NULL);
 	while (1)
@@ -116,7 +116,7 @@ char	*get_buffer(char buffer[], int fd)
 		read_line = ft_strjoin_gnl(read_line, buffer);
 		if (!read_line)
 			return (NULL);
-		if (ft_isin(buffer, '\n') >= 0)
+		if (ft_char_in_string(buffer, '\n') >= 0)
 			break ;
 	}
 	return (read_line);
@@ -128,24 +128,22 @@ char	*get_next_line(int fd)
 	char		*read_line;
 	static char	buffer[BUFFER_SIZE + 1];
 
-	line = NULL;
+	line = NULL; // wgn norminette zur initali..
 	if (fd < 0 || BUFFER_SIZE == 0)
 	{
-		moving_buffer_left(buffer);
 		return (NULL);
 	}
-	if (ft_isin(buffer, '\n') >= 0)
+	if (ft_char_in_string(buffer, '\n') >= 0) // wenn mehrere \n im buffer gelsen wurden (mehr als 2 linien gelesen)
 		line = strcpy_til_newline(buffer);
 	else
 	{
-		read_line = get_buffer(buffer, fd);
-		if (read_line != NULL && ft_strlen(read_line) == 0)
+		read_line = get_buffer(buffer, fd); // wenn keine \n im buffer ist
+		if (read_line != NULL && ft_strlen(read_line) == 0) // ob readline empty oder nicht
 		{
 			free(read_line);
 			return (NULL);
 		}
-		if (buffer[0] != '\0')
-			line = detele_all_after_newline(read_line);
+		line = detele_all_after_newline(read_line);
 	}
 	moving_buffer_left(buffer);
 	return (line);
@@ -162,7 +160,8 @@ int main ()
         line = get_next_line(fd);
         if (line == NULL)
             break;
-        printf("%s", line);
+        printf("line =%s", line);
+		free(line);
     }
     close(fd);
     return (0);

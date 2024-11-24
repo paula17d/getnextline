@@ -6,7 +6,7 @@
 /*   By: pauladrettas <pauladrettas@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 12:16:04 by pauladretta       #+#    #+#             */
-/*   Updated: 2024/11/23 12:16:08 by pauladretta      ###   ########.fr       */
+/*   Updated: 2024/11/24 16:22:46 by pauladretta      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 	return (free(s1), result);
 }
 
-int	ft_isin(char *string, char a)
+int	ft_char_in_string(char *string, char a)
 {
 	int	i;
 
