@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pauladrettas <pauladrettas@student.42.f    +#+  +:+       +#+        */
+/*   By: pdrettas <pdrettas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/23 12:15:35 by pauladretta       #+#    #+#             */
-/*   Updated: 2024/11/24 16:23:38 by pauladretta      ###   ########.fr       */
+/*   Created: 2024/11/24 18:40:14 by pdrettas          #+#    #+#             */
+/*   Updated: 2024/11/24 18:40:18 by pdrettas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

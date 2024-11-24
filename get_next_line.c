@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pauladrettas <pauladrettas@student.42.f    +#+  +:+       +#+        */
+/*   By: pdrettas <pdrettas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/24 17:30:18 by pauladretta       #+#    #+#             */
-/*   Updated: 2024/11/24 17:32:13 by pauladretta      ###   ########.fr       */
+/*   Created: 2024/11/24 18:39:50 by pdrettas          #+#    #+#             */
+/*   Updated: 2024/11/24 18:39:58 by pdrettas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char	*get_buffer(char buffer[], int fd)
 	int		bytes_read;
 	char	*read_line;
 
-	read_line = ft_strjoin_gnl(NULL, buffer); // 
+	read_line = ft_strjoin_gnl(NULL, buffer);
 	if (!read_line)
 		return (NULL);
 	while (1)
@@ -128,17 +128,17 @@ char	*get_next_line(int fd)
 	char		*read_line;
 	static char	buffer[BUFFER_SIZE + 1];
 
-	line = NULL; // wgn norminette zur initali..
+	line = NULL;
 	if (fd < 0 || BUFFER_SIZE == 0)
 	{
 		return (NULL);
 	}
-	if (ft_char_in_string(buffer, '\n') >= 0) // wenn mehrere \n im buffer gelsen wurden (mehr als 2 linien gelesen)
+	if (ft_char_in_string(buffer, '\n') >= 0)
 		line = strcpy_til_newline(buffer);
 	else
 	{
-		read_line = get_buffer(buffer, fd); // wenn keine \n im buffer ist
-		if (read_line != NULL && ft_strlen(read_line) == 0) // ob readline empty oder nicht
+		read_line = get_buffer(buffer, fd);
+		if (read_line != NULL && ft_strlen(read_line) == 0)
 		{
 			free(read_line);
 			return (NULL);
